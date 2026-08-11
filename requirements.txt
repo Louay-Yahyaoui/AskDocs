@@ -1,0 +1,10 @@
+langchain
+langchain-community
+langchain-text-splitters
+langchain-core
+langchain-huggingface
+sentence-transformers
+unstructured[pdf]
+unstructured-inference
+feedparser
+tiktoken
