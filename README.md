@@ -4,7 +4,7 @@ A retrieval-augmented QA system over arXiv papers: pull papers from the arXiv
 API → extract text from the PDFs → chunk → embed → store in Qdrant → retrieve
 on query → generate an answer grounded in the retrieved context.
 
-Currently a **single working notebook** (`ragger.ipynb`). Everything below
+Currently a **single working notebook** (`rag.ipynb`). Everything below
 that pipeline runs end-to-end; the rest is a scoped roadmap.
 
 ## What's working right now
@@ -52,7 +52,7 @@ Storage persists to a local `./qdrant` volume, so re-running ingestion doesn't r
 
 **Run**
 
-Open `ragger.ipynb` and run top to bottom. Qdrant must be running first.
+Open `rag.ipynb` and run top to bottom. Qdrant must be running first.
 
 ## Known limitations (current state)
 
