@@ -11,7 +11,7 @@ that pipeline runs end-to-end; the rest is a scoped roadmap.
 
 **Ingestion**
 - Queries the arXiv API (`export.arxiv.org/api/query`) via `urllib` + `feedparser`, parsing Atom entries into `{id: {url, title, author, tags}}`.
-- Downloads each PDF into memory (`BytesIO`, no files written to disk) and extracts text with `unstructured.partition_pdf` (`strategy="fast"` — text-layer extraction, no layout model, keeps the dependency footprint down).
+- Downloads each PDF into memory (`BytesIO`, no files written to disk) and extracts text with `unstructured.partition_pdf` (`strategy="fast"` : text-layer extraction, no layout model, keeps the dependency footprint down).
 - Filters out `Header` / `Footer` / `PageBreak` elements before concatenating each paper into one `Document`, with arXiv metadata (id, title, author, tags) attached.
 - Respects arXiv's rate limit (3s minimum between requests) regardless of success or failure on a given paper.
 
@@ -59,9 +59,9 @@ Open `rag.ipynb` and run top to bottom. Qdrant must be running first.
 - Everything lives in one notebook: no module structure yet, hard to reuse or test pieces independently.
 - No interface: querying means running notebook cells by hand.
 - No citation grounding in generation: the model answers from context but doesn't reliably cite *which* retrieved chunk/paper it drew from.
-- `strategy="fast"` means figures, tables, and captions aren't reliably categorized (arXiv PDFs are text-native, so prose extraction itself is fine — structure around non-text elements is not).
+- `strategy="fast"` means figures, tables, and captions aren't reliably categorized (arXiv PDFs are text-native, so prose extraction itself is fine : structure around non-text elements is not).
 - Single-hop retrieval only, no reranking: fine for a handful of papers, will degrade as the corpus grows.
-- No evaluation — answer quality is judged by eye.
+- No evaluation: answer quality is judged by eye.
 
 ## Roadmap
 
@@ -78,7 +78,7 @@ Roughly in priority order:
 ## Notes on dependencies
 
 `unstructured`'s PDF path pulls in system-level dependencies beyond pip
-(notably Poppler, for page-count/PDF-info calls) — not obvious from
+(notably Poppler, for page-count/PDF-info calls) : not obvious from
 `pip install unstructured` alone, and worth flagging for anyone else setting
 this up fresh. `strategy="fast"` avoids the heavier layout-model dependencies
 (`hi_res` needs those) but still needs Poppler on PATH.
