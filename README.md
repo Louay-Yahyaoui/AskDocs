@@ -56,24 +56,24 @@ Open `rag.ipynb` and run top to bottom. Qdrant must be running first.
 
 ## Known limitations (current state)
 
-- Everything lives in one notebook — no module structure yet, hard to reuse or test pieces independently.
-- No interface — querying means running notebook cells by hand.
-- No citation grounding in generation — the model answers from context but doesn't reliably cite *which* retrieved chunk/paper it drew from.
+- Everything lives in one notebook: no module structure yet, hard to reuse or test pieces independently.
+- No interface: querying means running notebook cells by hand.
+- No citation grounding in generation: the model answers from context but doesn't reliably cite *which* retrieved chunk/paper it drew from.
 - `strategy="fast"` means figures, tables, and captions aren't reliably categorized (arXiv PDFs are text-native, so prose extraction itself is fine — structure around non-text elements is not).
-- Single-hop retrieval only, no reranking — fine for a handful of papers, will degrade as the corpus grows.
+- Single-hop retrieval only, no reranking: fine for a handful of papers, will degrade as the corpus grows.
 - No evaluation — answer quality is judged by eye.
 
 ## Roadmap
 
 Roughly in priority order:
 
-1. **Citation grounding** — tag each retrieved chunk with its source (paper id/title) in the prompt, and require the model to cite which source(s) it used per claim.
-2. **Interface** — wrap the pipeline in a minimal Streamlit app (query box, retrieved-chunks view, generated answer) so it's demoable without opening the notebook.
-3. **Reorganize into modules** — split the notebook into `ingest/`, `retrieve/`, `generate/` modules so later upgrades touch one file each instead of the whole notebook.
-4. **Hybrid retrieval + reranking** — BM25 + dense with reciprocal rank fusion, cross-encoder reranker.
-5. **Agentic loop (LangGraph)** — query decomposition for multi-hop questions, self-correction / re-retrieval when context is judged insufficient.
-6. **Evaluation (RAGAS)** — a small hand-built Q&A benchmark scored for faithfulness, context precision/recall, answer relevance.
-7. **API wrapper (FastAPI) + Docker Compose** — decouple the pipeline from any one UI, package the whole stack (app + Qdrant) for reproducible deployment.
+1. **Citation grounding**: tag each retrieved chunk with its source (paper id/title) in the prompt, and require the model to cite which source(s) it used per claim.
+2. **Interface**: wrap the pipeline in a minimal Streamlit app (query box, retrieved-chunks view, generated answer) so it's demoable without opening the notebook.
+3. **Reorganize into modules**: split the notebook into `ingest/`, `retrieve/`, `generate/` modules so later upgrades touch one file each instead of the whole notebook.
+4. **Hybrid retrieval + reranking**: BM25 + dense with reciprocal rank fusion, cross-encoder reranker.
+5. **Agentic loop (LangGraph)**: query decomposition for multi-hop questions, self-correction / re-retrieval when context is judged insufficient.
+6. **Evaluation (RAGAS)**: a small hand-built Q&A benchmark scored for faithfulness, context precision/recall, answer relevance.
+7. **API wrapper (FastAPI) + Docker Compose**: decouple the pipeline from any one UI, package the whole stack (app + Qdrant) for reproducible deployment.
 
 ## Notes on dependencies
 
